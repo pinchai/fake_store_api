@@ -5,13 +5,12 @@ import sqlite3
 app = Flask(__name__)
 CORS(app)
 
-conn = sqlite3.connect('database_st2_6.db', check_same_thread=False)
-cursor = conn.cursor()
-
 
 @app.get('/')
 @app.get('/products')
 def getProducts():
+    conn = sqlite3.connect('database_st2_6.db', check_same_thread=False)
+    cursor = conn.cursor()
     result = cursor.execute('''SELECT * FROM product''')
     data = result.fetchall()
     conn.commit()
